@@ -1,0 +1,27 @@
+/* frontend/src/components/Card.css */
+@keyframes slideLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .slide-in-left {
+    animation: slideLeft 0.7s ease-out;
+  }
+  
+  
+  .slide-in-right {
+    animation: slideRight 0.7s ease-out;
+  }
