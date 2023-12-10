@@ -31,7 +31,7 @@ const Home = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("cp : ", currentPage);
-        console.log(data);
+        // console.log(data);
         setStartups(data.data);
         setTotalPages(() => data.totalStartup);
         setLoading(false);
@@ -40,7 +40,7 @@ const Home = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-    console.log(currentPage, totalPages);
+    // console.log(currentPage, totalPages);
     setCurrentPage(Math.min(currentPage, totalPages));
   };
 

@@ -30,7 +30,7 @@ const Card = ({ startup }) => {
             {startup.StartupName}
           </h2>
           <p className="text-sm">
-            {startup.CityLocation}, {startup["Date"]}
+            {startup.CityLocation}, {new Date(startup.date).getFullYear()}
           </p>
         </div>
         <button
@@ -42,7 +42,7 @@ const Card = ({ startup }) => {
       </div>
       <div className="p-4">
         <p className="text-xl md:text-2xl lg:text-3xl font-bold">
-          {startup["AmountInUSD"] ? `$${startup["AmountInUSD"]} USD` : "N/A"}
+          {startup.AmountInUSD ? `$${startup.AmountInUSD} USD` : "N/A"}
         </p>
       </div>
       {isModalOpen && <Modal startup={startup} onClose={closeModal} />}
