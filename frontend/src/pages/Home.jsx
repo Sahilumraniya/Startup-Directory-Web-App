@@ -20,8 +20,8 @@ const Home = () => {
     setLoading(true);
     const apiUrl =
       selectedFilter === "All"
-        ? `http://localhost:3001/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}`
-        : `http://localhost:3001/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}&filter=${selectedFilter}`;
+        ? `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}`
+        : `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}&filter=${selectedFilter}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   const fetchIndustryOptions = () => {
-    fetch("http://localhost:3001/api/v1/startups/uniqueIndustry")
+    fetch(`${import.meta.env.VITE_APP_API_URL}/api/v1/startups/uniqueIndustry`)
       .then((response) => response.json())
       .then((data) => setIndsutryOption(["All", ...data.data]))
       .catch((error) =>
