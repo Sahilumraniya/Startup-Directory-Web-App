@@ -20,13 +20,17 @@ const Home = () => {
     setLoading(true);
     const apiUrl =
       selectedFilter === "All"
-        ? `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}`
-        : `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${currentPage+1}&pageSize=${itemsPerPage}&filter=${selectedFilter}`;
+        ? `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${
+            currentPage + 1
+          }&pageSize=${itemsPerPage}`
+        : `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${
+            currentPage + 1
+          }&pageSize=${itemsPerPage}&filter=${selectedFilter}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("cp : ",currentPage);
+        console.log("cp : ", currentPage);
         console.log(data);
         setStartups(data.data);
         setTotalPages(() => data.totalStartup);
@@ -59,23 +63,23 @@ const Home = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-center px-48">
-        <h1 className="text-3xl font-semibold text-center my-4">
+      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-48">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center my-4">
           Discover the Future: Navigate the Startup Ecosystem with Our
           Interactive Directory – 🚀 Explore, Filter, and Connect with
           Innovative Ventures Redefining Industries.
         </h1>
       </div>
 
-      <div className="w-full flex items-center justify-center my-4">
-        <label className="mr-2">Filter by Industry:</label>
+      <div className="flex flex-col items-center justify-center">
+        <label className="mb-2 text-sm md:text-base lg:text-lg xl:text-xl">Filter by Industry:</label>
         <select
-          className="p-2 border border-gray-300 rounded-md text-black"
+          className="w-2/3 sm:w-1/4 p-2 border border-gray-300 rounded-md text-black text-sm md:text-base lg:text-lg xl:text-xl"
           value={selectedFilter}
           onChange={handleFilterChange}
         >
           {indsutryOption.map((industryVertical) => (
-            <option key={industryVertical} value={industryVertical}>
+            <option className="mx-5" key={industryVertical} value={industryVertical}>
               {industryVertical}
             </option>
           ))}
@@ -86,7 +90,7 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <div>
-          <div className="flex flex-wrap justify-center gap-x-px">
+          <div className="flex flex-wrap justify-center gap-x-px mx-5">
             {startups.length != 0 ? (
               startups.map((startup) => (
                 <Card key={startup.SNo} startup={startup} />
@@ -107,7 +111,7 @@ const Home = () => {
               Previous
             </button>
             <p>
-              Page {Math.min(currentPage+1, totalPages)} of {totalPages}
+              Page {Math.min(currentPage + 1, totalPages)} of {totalPages}
             </p>
             <button
               className="px-4 py-2 bg-blue-500 text-white rounded-md"
