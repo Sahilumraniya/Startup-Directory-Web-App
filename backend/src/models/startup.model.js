@@ -1,40 +1,43 @@
-import mongoose , {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const startupSchema = new Schema({
-    StartupName : {
-        type : String,
-        require : [true , "Please Enter name of your stratup"],
-        index : true
+const startupSchema = new Schema(
+  {
+    StartupName: {
+      type: String,
+      require: [true, "Please Enter name of your stratup"],
+      index: true,
     },
-    StartupName : {
-        type : String,
-        require : [true , "Please Enter industry of your stratup"],
-        index : true
+    IndustryVertical: {
+      type: String,
+      require: [true, "Please Enter industry of your stratup"],
+      index: true,
     },
-    SubVertical : {
-        type : String,
+    date: {
+      type: String,
+      require: [true, "Please Enter start year stratup"],
     },
-    CityLocation : {
-        type : String,
+    SubVertical: {
+      type: String,
     },
-    InvestorsName : {
-        type : String,
+    CityLocation: {
+      type: String,
     },
-    InvestmentType : {
-        type : String,
+    InvestorsName: {
+      type: String,
     },
-    AmountInUSD : {
-        type : String,
-    },  
-    remarks : {
-        type : String,
+    InvestmentType: {
+      type: String,
     },
-    date : {
-        type : Date,
-        default : Date.now
-    }
-},{
-    timestamps : true
-});
+    AmountInUSD: {
+      type: String,
+    },
+    remarks: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export const Startup = mongoose.model("Startup" , startupSchema);
+export const Startup = mongoose.model("Startup", startupSchema);

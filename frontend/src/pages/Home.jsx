@@ -1,6 +1,7 @@
 // frontend/src/Home.js
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card";
+import "./Home.css";
 
 const Home = () => {
   const [startups, setStartups] = useState([]);
@@ -42,7 +43,7 @@ const Home = () => {
       });
     // console.log(currentPage, totalPages);
     setCurrentPage(Math.min(currentPage, totalPages));
-  };
+  };  
 
   const fetchIndustryOptions = () => {
     fetch(`${import.meta.env.VITE_APP_API_URL}/api/v1/startups/uniqueIndustry`)
@@ -54,6 +55,7 @@ const Home = () => {
   };
 
   const handleFilterChange = (event) => {
+    console.log("filter change : ", event.target.value);
     setSelectedFilter(event.target.value);
   };
 
@@ -72,28 +74,46 @@ const Home = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <label className="mb-2 text-sm md:text-base lg:text-lg xl:text-xl">Filter by Industry:</label>
-        <select
-          className="w-2/3 sm:w-1/4 p-2 border border-gray-300 rounded-md text-black text-sm md:text-base lg:text-lg xl:text-xl"
-          value={selectedFilter}
-          onChange={handleFilterChange}
-        >
-          {indsutryOption.map((industryVertical) => (
-            <option className="mx-5" key={industryVertical} value={industryVertical}>
-              {industryVertical}
-            </option>
-          ))}
-        </select>
+        <label className="mb-2 text-sm md:text-base lg:text-lg xl:text-xl">
+          Filter by Industry:
+        </label>
+
+        {loading ? (
+          <div className="w-2/3 sm:w-1/4 p-2 h-6 max-w-sm bg-white mb-4 rounded-md shadow-md relative animated-background"></div>
+        ) : (
+          <select
+            className="w-2/3 sm:w-1/4 p-2 border border-gray-300 rounded-md text-black text-sm md:text-base lg:text-lg xl:text-xl"
+            value={selectedFilter}
+            onChange={handleFilterChange}
+          >
+            {indsutryOption.map((industryVertical) => (
+              <option
+                className="mx-5"
+                key={industryVertical}
+                value={industryVertical}
+              >
+                {industryVertical}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
       {loading ? (
-        <p>Loading...</p>
+        <div className="flex flex-wrap justify-center gap-y-4 gap-x-10 mx-5 my-5">
+          {Array.from({ length: itemsPerPage - 7 }, (_, i) => (
+            <div
+              key={i}
+              className="w-full max-w-sm bg-white p-4 mb-4 rounded-md shadow-md relative animated-background"
+            ></div>
+          ))}
+        </div>
       ) : (
         <div>
           <div className="flex flex-wrap justify-center gap-x-px mx-5">
             {startups.length != 0 ? (
               startups.map((startup) => (
-                <Card key={startup.SNo} startup={startup} />
+                <Card key={startup._id} startup={startup} />
               ))
             ) : (
               <div className="text-2xl h-[500px] max-h-full flex items-center">

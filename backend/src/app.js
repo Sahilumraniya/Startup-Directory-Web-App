@@ -26,7 +26,8 @@ app.use(
 //import all router
 import startupRouter from "./routers/startup.router.js";
 
-//royter delecation
+//router delecation
+
 app.use("/api/v1/startups", startupRouter);
 
 export default app;

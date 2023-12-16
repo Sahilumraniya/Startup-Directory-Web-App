@@ -3,7 +3,6 @@ import { Startup } from "../models/startup.model.js";
 const getAllStartups = async (req, res) => {
   try {
     const { page = 1, pageSize = 10, filter } = req.query;
-    console.log("filter", filter);
 
     // Convert page and pageSize to numbers
     const pageNumber = parseInt(page, 10);
@@ -19,12 +18,21 @@ const getAllStartups = async (req, res) => {
       startups = await Startup.find().skip(skip).limit(limit);
       collectionLength = await Startup.countDocuments();
     } else {
-      startups = await Startup.find({ IndustryVertical: filter })
-        .skip(skip)
-        .limit(limit);
-      collectionLength = await Startup.countDocuments({
-        IndustryVertical: filter,
-      });
+      if (filter == "none") {
+        startups = await Startup.find({ IndustryVertical: null })
+          .skip(skip)
+          .limit(limit);
+        collectionLength = await Startup.countDocuments({
+          IndustryVertical: null,
+        });
+      } else {
+        startups = await Startup.find({ IndustryVertical: filter })
+          .skip(skip)
+          .limit(limit);
+        collectionLength = await Startup.countDocuments({
+          IndustryVertical: filter,
+        });
+      }
     }
 
     // Send the response
@@ -44,7 +52,14 @@ const getAllStartups = async (req, res) => {
 
 const getuniqueIndustry = async (req, res) => {
   try {
-    const uniqueIndustry = await Startup.distinct("IndustryVertical");
+    let uniqueIndustry = await Startup.distinct("IndustryVertical");
+    uniqueIndustry = uniqueIndustry.map((ind)=>{
+      if(ind==null){
+        return "none"
+      }else{
+        return ind
+      }
+    })
     res.json({
       success: true,
       data: uniqueIndustry,
@@ -60,6 +75,7 @@ const getuniqueIndustry = async (req, res) => {
 
 const addStartup = async (req, res) => {
   try {
+    console.log(req.body);
     const startup = await Startup.create(req.body);
     res.json({
       success: true,

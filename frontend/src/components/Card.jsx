@@ -16,6 +16,16 @@ const Card = ({ startup }) => {
     setModalOpen(false);
   };
 
+  const getYear = (date) => {
+    const [day, month, year] = date.split("-");
+    const d = new Date(`${year}-${month}-${day}`).getFullYear();
+    if (isNaN(d) || d == undefined || d == null) {
+      console.log(d, date);
+      return "N/A";
+    }
+    return d;
+  };
+
   return (
     <div
       className={`card w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto bg-gradient-to-br ${gradientColors.join(
@@ -30,7 +40,7 @@ const Card = ({ startup }) => {
             {startup.StartupName}
           </h2>
           <p className="text-sm">
-            {startup.CityLocation}, {new Date(startup.date).getFullYear()}
+            {startup.CityLocation ? startup.CityLocation : 'N/A'}, {getYear(startup.date)}
           </p>
         </div>
         <button
