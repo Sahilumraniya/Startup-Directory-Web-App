@@ -1,11 +1,10 @@
 // frontend/src/App.js
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 import "./App.css";
-import Home from "./pages/Home"; 
+import Home from "./pages/Home";
 import About from "./pages/About"; // Assuming you have an About component
-import Contact from "./pages/Contact"; // Assuming you have a Contact component
 import AddStartUp from "./pages/AddStartUp";
 
 const App = () => {
@@ -14,7 +13,6 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/add-startup" element={<AddStartUp />} />
         <Route path="/" element={<Home />} />
       </Routes>
