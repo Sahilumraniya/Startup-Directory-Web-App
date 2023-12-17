@@ -73,8 +73,8 @@ const Home = () => {
         </h1>
       </div>
 
-      <div className="flex flex-col items-center justify-center">
-        <label className="mb-2 text-sm md:text-base lg:text-lg xl:text-xl">
+      <div className="flex flex-col items-center justify-center my-8">
+        <label className="mb-2 md:text-base text-xl xl:text-3xl">
           Filter by Industry:
         </label>
 

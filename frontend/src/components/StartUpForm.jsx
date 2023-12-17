@@ -4,13 +4,7 @@ import { useForm } from "react-hook-form";
 const StartUpForm = () => {
   const [loading, setLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setError,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: {
       StartupName: "",
@@ -27,19 +21,6 @@ const StartUpForm = () => {
 
   const submit = (data) => {
     setLoading(true);
-    console.log(data);
-    console.log(typeof data);
-    console.log(JSON.stringify(data));
-    console.log(typeof JSON.stringify(data));
-
-    if (data.StartupName === "") {
-      setError("StartupName", {
-        type: "manual",
-        message: "Startup Name is required",
-      });
-      return;
-    }
-
     fetch(`${import.meta.env.VITE_APP_API_URL}/api/v1/startups`, {
       method: "POST",
       headers: {
@@ -67,7 +48,7 @@ const StartUpForm = () => {
             className="w-full max-w-lg mx-auto"
             onSubmit={handleSubmit(submit)}
           >
-            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap mx-3 mb-6">
               <div className="w-full px-3 my-2">
                 <label
                   className="block uppercase tracking-wide text-white text-xs font-bold mb-2"

@@ -8,7 +8,7 @@ const AddStartUp = () => {
         <h1 className="text-center text-5xl my-4 font-semibold">
           Add Start-Up
         </h1>
-        <div className="w-2/3 sm:w-1/6">
+        <div className="w-full">
           <StartUpForm />
         </div>
       </div>
