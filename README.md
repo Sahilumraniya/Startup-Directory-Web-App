@@ -13,6 +13,7 @@ The project is divided into two main parts:
 
 - **Startup Cards**: View a visually appealing grid of startup cards displaying key information.
 - **Detailed View**: Click on a card to open a detailed popup with comprehensive startup information.
+- **Search Functionality:** Find specific startups based on keywords.
 - **Filtering**: Use the dropdown menu to filter the list of startups based on industry type/domain.
 - **Pagination**: View 10 startups per page and click "Next" to load more.
 
@@ -24,6 +25,7 @@ The project is divided into two main parts:
   - Tailwind CSS
 
 - **Backend**:
+  - [Node.js](https://nodejs.org/en/)
   - [Express](https://expressjs.com/)
   - [MongoDB](https://www.mongodb.com/) (or your preferred database)
 
@@ -32,7 +34,7 @@ The project is divided into two main parts:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/startup-directory-web-app.git
+   git clone https://github.com/Sahilumraniya/Startup-Directory-Web-App.git
     
     cd startup-directory-web-app/frontend
     npm install
@@ -41,9 +43,9 @@ The project is divided into two main parts:
     npm install
 
     # Frontend (in the frontend directory)
-    npm start
+    npm run dev
 
     # Backend (in the backend directory)
-    npm start
+    npm run dev
 
     ```
