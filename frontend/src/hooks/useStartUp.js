@@ -16,7 +16,7 @@ function useStartUp({ searchQuery, selectedFilter, currentPage, setCurrentPage }
         : `${import.meta.env.VITE_APP_API_URL}/api/v1/startups?page=${
             currentPage + 1
           }&pageSize=${itemsPerPage}&filter=${selectedFilter}&search=${searchQuery}`;
-
+          // console.log(apiUrl);
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {

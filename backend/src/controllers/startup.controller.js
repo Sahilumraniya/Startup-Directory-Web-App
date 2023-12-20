@@ -17,16 +17,18 @@ const getAllStartups = async (req, res) => {
     let collectionLength = 0;
 
     if (search && search.trim() !== "") {
+      // console.info("Search query:", search.trim());
       const searchQuery = search.toLowerCase();
-      let query = {
-        StartupName: { $regex: new RegExp(searchQuery, "i") },
-      };
+      let query = {};
 
       // Add filter condition if provided
-      if (filter && filter !== "All") {
+      if (filter && filter !== "All" && filter !== "none") {
         query.IndustryVertical = filter;
+      } else if (filter == "none") {
+        query.IndustryVertical = null;
       }
-
+      query.StartupName = { $regex: new RegExp(searchQuery, "i") };
+      // console.log("S:Query:", query);
       const matchingStartups = await Startup.find(query)
         .skip(skip)
         .limit(effectivePageSize);
@@ -55,7 +57,7 @@ const getAllStartups = async (req, res) => {
       query.StartupName = { $regex: new RegExp(search, "i") };
     }
 
-    console.log(query);
+    // console.log("Query " + query);
 
     startups = await Startup.find(query).skip(skip).limit(effectivePageSize);
     collectionLength = await Startup.countDocuments(query);
